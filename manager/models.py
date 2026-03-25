@@ -14,7 +14,8 @@ class Worker(AbstractUser):
         Position,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name="workers"
     )
 
     class Meta:
