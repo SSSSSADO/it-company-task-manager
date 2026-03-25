@@ -37,4 +37,9 @@ urlpatterns = [
         views.PositionListView.as_view(),
         name="position-list"
     ),
+    path(
+        "positions/<int:pk>",
+        views.PositionDetailView.as_view(),
+        name="position-detail"
+    ),
 ]

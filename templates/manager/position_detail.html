@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Position Detail</title>
+{% endblock %}
+
+{% block content %}
+  {% if position.workers.all %}
+    <ul>
+      {% for worker in position.workers.all %}
+        <li>{{ worker.username }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    There are no employees in this position.
+  {% endif %}
+{% endblock %}

@@ -9,7 +9,7 @@
     <ul>
       {% for position in position_list %}
         <li>
-          {{ position.name }}
+          <a href="{% url 'manager:position-detail' pk=position.id %}">{{ position.name }}</a>
         </li>
       {% endfor %}
     </ul>
