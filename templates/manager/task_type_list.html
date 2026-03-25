@@ -9,7 +9,8 @@
     <ul>
       {% for task_type in task_type_list %}
         <li>
-          {{ task_type.name }} ({{ task_type.tasks.count }})
+          <a href="{% url 'manager:task-type-detail' pk=task_type.id %}">{{ task_type.name }}</a>
+          ({{ task_type.tasks.count }})
         </li>
       {% endfor %}
     </ul>

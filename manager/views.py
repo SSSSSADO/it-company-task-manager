@@ -40,6 +40,12 @@ class TaskTypeListView(generic.ListView):
     context_object_name = "task_type_list"
 
 
+class TaskTypeDetailView(generic.DetailView):
+    model = TaskType
+    template_name = "manager/task_type_detail.html"
+    context_object_name = "task_type"
+
+
 # Position views
 class PositionListView(generic.ListView):
     model = Position

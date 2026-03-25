@@ -26,6 +26,11 @@ urlpatterns = [
         views.TaskTypeListView.as_view(),
         name="task-type-list"
     ),
+    path(
+        "task-types/<int:pk>",
+        views.TaskTypeDetailView.as_view(),
+        name="task-type-detail"
+    ),
     # Position paths
     path(
         "positions/",
