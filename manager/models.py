@@ -1,9 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class Position(models.Model):
     name = models.CharField(max_length=255)
+
+    def get_absolute_url(self):
+        return reverse("manager:position_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -23,6 +27,9 @@ class Worker(AbstractUser):
         verbose_name = "Worker"
         verbose_name_plural = "Workers"
 
+    def get_absolute_url(self):
+        return reverse("manager:worker_detail", kwargs={"pk": self.pk})
+
     def __str__(self):
         return (
             f"{self.username} ({self.position})" if self.position
@@ -32,6 +39,9 @@ class Worker(AbstractUser):
 
 class TaskType(models.Model):
     name = models.CharField(max_length=255)
+
+    def get_absolute_url(self):
+        return reverse("manager:task_type_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -67,6 +77,9 @@ class Task(models.Model):
         ordering = ["-deadline"]
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
+
+    def get_absolute_url(self):
+        return reverse("manager:task_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return (
