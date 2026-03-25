@@ -29,6 +29,10 @@ class WorkerListView(generic.ListView):
     model = Worker
 
 
+class WorkerDetailView(generic.DetailView):
+    model = Worker
+
+
 # TaskType views
 class TaskTypeListView(generic.ListView):
     model = TaskType

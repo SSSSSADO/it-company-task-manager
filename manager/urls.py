@@ -15,6 +15,11 @@ urlpatterns = [
     ),
     # Worker paths
     path("workers/", views.WorkerListView.as_view(), name="worker-list"),
+    path(
+        "workers/<int:pk>",
+        views.WorkerDetailView.as_view(),
+        name="worker-detail"
+    ),
     # TaskType paths
     path(
         "task-types/",

@@ -9,7 +9,7 @@
     <ul>
       {% for worker in worker_list %}
         <li>
-          {{ worker.username }}
+          <a href="{% url 'manager:worker-detail' pk=worker.id %}">{{ worker.username }}</a>
           {% if worker.position %}
             ({{ worker.position }})
           {% else %}
