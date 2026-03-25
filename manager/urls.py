@@ -16,4 +16,10 @@ urlpatterns = [
         views.TaskTypeListView.as_view(),
         name="task-type-list"
     ),
+    # Position paths
+    path(
+        "positions/",
+        views.PositionListView.as_view(),
+        name="position-list"
+    ),
 ]
