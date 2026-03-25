@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task Type List</title>
+{% endblock %}
+
+{% block content %}
+  {% if task_type_list %}
+    <ul>
+      {% for task_type in task_type_list %}
+        <li>
+          {{ task_type.name }} ({{ task_type.tasks.count }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No task type found</h3>
+  {% endif %}
+{% endblock %}

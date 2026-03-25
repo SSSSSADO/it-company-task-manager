@@ -10,4 +10,10 @@ urlpatterns = [
     path("tasks/", views.TaskListView.as_view(), name="task-list"),
     # Worker paths
     path("workers/", views.WorkerListView.as_view(), name="worker-list"),
+    # TaskType paths
+    path(
+        "task-types/",
+        views.TaskTypeListView.as_view(),
+        name="task-type-list"
+    ),
 ]
