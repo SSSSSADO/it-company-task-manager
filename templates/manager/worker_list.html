@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Worker List</title>
+{% endblock %}
+
+{% block content %}
+  {% if worker_list %}
+    <ul>
+      {% for worker in worker_list %}
+        <li>
+          {{ worker.username }}
+          {% if worker.position %}
+            ({{ worker.position }})
+          {% else %}
+            (Not Defined)
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No workers found</h3>
+  {% endif %}
+{% endblock %}
