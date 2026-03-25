@@ -8,6 +8,11 @@ urlpatterns = [
     path("", views.index, name="index"),
     # Task paths
     path("tasks/", views.TaskListView.as_view(), name="task-list"),
+    path(
+        "tasks/<int:pk>",
+        views.TaskDetailView.as_view(),
+        name="task-detail"
+    ),
     # Worker paths
     path("workers/", views.WorkerListView.as_view(), name="worker-list"),
     # TaskType paths

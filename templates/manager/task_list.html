@@ -9,7 +9,7 @@
     <ul>
       {% for task in task_list %}
         <li>
-          {{ task.name }}
+          <a href="{% url 'manager:task-detail' pk=task.id %}">{{ task.name }}</a>
         </li>
       {% endfor %}
     </ul>
