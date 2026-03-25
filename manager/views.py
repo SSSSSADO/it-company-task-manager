@@ -1,5 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.views import generic
 
 from manager.models import Position, Worker, TaskType, Task
 
@@ -13,3 +14,7 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_open_tasks": Task.objects.filter(is_completed=False).count(),
     }
     return render(request, "manager/index.html", context=context)
+
+
+class TaskListView(generic.ListView):
+    model = Task

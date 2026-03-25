@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task List</title>
+{% endblock %}
+
+{% block content %}
+  {% if task_list %}
+    <ul>
+      {% for task in task_list %}
+        <li>
+          {{ task.name }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No tasks found</h3>
+  {% endif %}
+{% endblock %}
