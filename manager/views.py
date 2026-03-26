@@ -71,3 +71,18 @@ class PositionListView(generic.ListView):
 
 class PositionDetailView(generic.DetailView):
     model = Position
+
+
+class PositionCreateView(generic.CreateView):
+    model = Position
+    form_class = forms.PositionForm
+
+
+class PositionUpdateView(generic.UpdateView):
+    model = Position
+    form_class = forms.PositionForm
+
+
+class PositionDeleteView(generic.DeleteView):
+    model = Position
+    success_url = reverse_lazy("manager:position-list")

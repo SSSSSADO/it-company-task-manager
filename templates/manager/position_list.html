@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+  <a href="{% url 'manager:position-create' %}">Create Position</a>
   {% if position_list %}
     <ul>
       {% for position in position_list %}

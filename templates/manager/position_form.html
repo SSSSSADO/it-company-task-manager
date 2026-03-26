@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Task Form</title>
+	<title>Position Form</title>
 {% endblock %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} {{ position.name }}</h1>
+	<h1>{{ object|yesno:"Update,Create" }} {{ task.name }}</h1>
 
   <form action="" method="post">
     {% csrf_token %}
