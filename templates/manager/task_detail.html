@@ -16,13 +16,16 @@
   <p>Priority: {{ task.priority }}</p>
   <p>Deadline: {{ task.deadline }}</p>
   <p>Description: {{ task.description }}</p>
-  <p>Task type: {{ task.task_type }}</p>
+  <p>
+    Task type:
+    <a href="{{ task.task_type.get_absolute_url }}">{{ task.task_type }}</a>
+  </p>
   {% if task.assignees %}
     Workers:
     <ul>
       {% for assignee in task.assignees.all %}
         <li>
-          {{ assignee.username }}
+          <a href="{{ assignee.get_absolute_url }}">{{ assignee.username }}</a>
         </li>
       {% endfor %}
     </ul>

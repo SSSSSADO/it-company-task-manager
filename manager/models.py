@@ -7,7 +7,7 @@ class Position(models.Model):
     name = models.CharField(max_length=255)
 
     def get_absolute_url(self):
-        return reverse("manager:position_detail", kwargs={"pk": self.pk})
+        return reverse("manager:position-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -28,7 +28,7 @@ class Worker(AbstractUser):
         verbose_name_plural = "Workers"
 
     def get_absolute_url(self):
-        return reverse("manager:worker_detail", kwargs={"pk": self.pk})
+        return reverse("manager:worker-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return (
@@ -41,7 +41,7 @@ class TaskType(models.Model):
     name = models.CharField(max_length=255)
 
     def get_absolute_url(self):
-        return reverse("manager:task_type_detail", kwargs={"pk": self.pk})
+        return reverse("manager:task-type-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -79,7 +79,7 @@ class Task(models.Model):
         verbose_name_plural = "Tasks"
 
     def get_absolute_url(self):
-        return reverse("manager:task_detail", kwargs={"pk": self.pk})
+        return reverse("manager:task-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return (

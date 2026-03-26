@@ -8,7 +8,9 @@
   {% if position.workers.all %}
     <ul>
       {% for worker in position.workers.all %}
-        <li>{{ worker.username }}</li>
+        <li>
+          <a href="{{ worker.get_absolute_url }}">{{ worker.username }}</a>
+        </li>
       {% endfor %}
     </ul>
   {% else %}
