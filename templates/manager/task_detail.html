@@ -32,4 +32,7 @@
   {% else %}
     Nobody is doing this task
   {% endif %}
+  <a href="{% url 'manager:task-update' pk=task.id %}">Update this Task</a>
+  <br>
+  <a href="{% url 'manager:task-delete' pk=task.id %}">Delete this Task</a>
 {% endblock %}

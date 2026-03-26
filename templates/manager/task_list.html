@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+  <a href="{% url 'manager:task-create' %}">Create new Task</a>
   {% if task_list %}
     <ul>
       {% for task in task_list %}

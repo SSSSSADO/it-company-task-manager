@@ -1,8 +1,10 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from manager.models import Position, Worker, TaskType, Task
+from manager import forms
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -23,6 +25,21 @@ class TaskListView(generic.ListView):
 
 class TaskDetailView(generic.DetailView):
     model = Task
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+    form_class = forms.TaskForm
+
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    form_class = forms.TaskForm
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("manager:task-list")
 
 
 # Worker views
