@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -16,6 +17,14 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_open_tasks": Task.objects.filter(is_completed=False).count(),
     }
     return render(request, "manager/index.html", context=context)
+
+
+class CustomLoginView(LoginView):
+    template_name = "registration/login.html"
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy("manager:login")
 
 
 # Task views
@@ -49,6 +58,12 @@ class WorkerListView(generic.ListView):
 
 class WorkerDetailView(generic.DetailView):
     model = Worker
+
+
+class WorkerCreateView(generic.CreateView):
+    model = Worker
+    form_class = forms.WorkerCreationForm
+    success_url = reverse_lazy("manager:login")
 
 
 # TaskType views

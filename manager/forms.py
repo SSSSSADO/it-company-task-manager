@@ -10,8 +10,8 @@ class PositionForm(forms.ModelForm):
         fields = "__all__"
 
 
-class WorkerCreateForm(UserCreationForm):
-    class Meta:
+class WorkerCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = Worker
         fields = ("username", "position", "first_name", "last_name", "email")
 

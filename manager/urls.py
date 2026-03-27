@@ -6,6 +6,9 @@ app_name = "manager"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("register/", views.WorkerCreateView.as_view(), name="register"),
+    path("login/", views.CustomLoginView.as_view(), name="login"),
+    path("logout/", views.CustomLogoutView.as_view(), name="logout"),
     # Task paths
     path("tasks/", views.TaskListView.as_view(), name="task-list"),
     path(

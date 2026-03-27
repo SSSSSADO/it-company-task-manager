@@ -115,6 +115,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = "manager.Worker"
+LOGIN_REDIRECT_URL = "manager:index"
+LOGOUT_REDIRECT_URL = "login"
 
 INTERNAL_IPS = [
     "127.0.0.1",
