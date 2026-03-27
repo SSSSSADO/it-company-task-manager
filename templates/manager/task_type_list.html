@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+  <a href="{% url 'manager:task-type-create' %}">Create Task Type</a>
   {% if task_type_list %}
     <ul>
       {% for task_type in task_type_list %}

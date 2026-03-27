@@ -64,6 +64,25 @@ class TaskTypeDetailView(generic.DetailView):
     context_object_name = "task_type"
 
 
+class TaskTypeCreateView(generic.CreateView):
+    model = TaskType
+    form_class = forms.TaskTypeForm
+    template_name = "manager/task_type_form.html"
+
+
+class TaskTypeUpdateView(generic.UpdateView):
+    model = TaskType
+    form_class = forms.TaskTypeForm
+    template_name = "manager/task_type_form.html"
+
+
+class TaskTypeDeleteView(generic.DeleteView):
+    model = TaskType
+    success_url = reverse_lazy("manager:task-type-list")
+    template_name = "manager/task_type_confirm_delete.html"
+    context_object_name = "task_type"
+
+
 # Position views
 class PositionListView(generic.ListView):
     model = Position
