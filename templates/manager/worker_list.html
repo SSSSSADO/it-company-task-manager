@@ -5,16 +5,20 @@
 {% endblock %}
 
 {% block content %}
+  <form action="" method="get" class="filter-form">
+    {{ filter_form.q.label_tag }} {{ filter_form.q }}
+    {{ filter_form.position.label_tag }} {{ filter_form.position }}
+    <input type="submit" value="Filter">
+  </form>
+
   {% if worker_list %}
     <ul>
       {% for worker in worker_list %}
         <li>
-          <a href="{% url 'manager:worker-detail' pk=worker.id %}">{{ worker.username }}</a>
-          {% if worker.position %}
-            ({{ worker.position }})
-          {% else %}
-            (Not Defined)
-          {% endif %}
+          <a href="{% url 'manager:worker-detail' pk=worker.id %}">
+            {{ worker.username }}
+          </a>
+         - {{ worker.position }}
         </li>
       {% endfor %}
     </ul>

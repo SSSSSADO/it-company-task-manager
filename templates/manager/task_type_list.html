@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+  <form action="" method="get" class="filter-form">
+    {{ filter_form.q.label_tag }} {{ filter_form.q }}
+    <input type="submit" value="Filter">
+  </form>
+
   <a href="{% url 'manager:task-type-create' %}">Create Task Type</a>
   {% if task_type_list %}
     <ul>

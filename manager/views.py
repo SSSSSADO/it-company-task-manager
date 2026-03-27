@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.db.models import Q
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -31,6 +32,36 @@ class CustomLogoutView(LogoutView):
 # Task views
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
+    template_name = "manager/task_list.html"
+    context_object_name = "tasks"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        form = forms.TaskFilterForm(self.request.GET)
+        if form.is_valid():
+            q = form.cleaned_data.get("q")
+            if q:
+                qs = qs.filter(Q(name__icontains=q) | Q(description__icontains=q))
+
+            is_completed = form.cleaned_data.get("is_completed")
+            if is_completed == "1":
+                qs = qs.filter(is_completed=True)
+            elif is_completed == "0":
+                qs = qs.filter(is_completed=False)
+
+            priority = form.cleaned_data.get("priority")
+            if priority:
+                qs = qs.filter(priority=priority)
+
+            task_type = form.cleaned_data.get("task_type")
+            if task_type:
+                qs = qs.filter(task_type=task_type)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = forms.TaskFilterForm(self.request.GET)
+        return context
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -55,6 +86,24 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 # Worker views
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
+    context_object_name = "worker_list"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        form = forms.WorkerFilterForm(self.request.GET)
+        if form.is_valid():
+            q = form.cleaned_data.get("q")
+            if q:
+                qs = qs.filter(username__icontains=q)
+            position = form.cleaned_data.get("position")
+            if position:
+                qs = qs.filter(position=position)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = forms.WorkerFilterForm(self.request.GET)
+        return context
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
@@ -72,6 +121,21 @@ class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     template_name = "manager/task_type_list.html"
     context_object_name = "task_type_list"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        form = forms.TaskTypeFilterForm(self.request.GET)
+        if form.is_valid():
+            q = form.cleaned_data.get("q")
+            if q:
+                qs = qs.filter(name__icontains=q)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = forms.TaskTypeFilterForm(self.request.GET)
+        return context
+
 
 
 class TaskTypeDetailView(LoginRequiredMixin, generic.DetailView):
@@ -102,6 +166,21 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
 # Position views
 class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
+    context_object_name = "position_list"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        form = forms.PositionFilterForm(self.request.GET)
+        if form.is_valid():
+            q = form.cleaned_data.get("q")
+            if q:
+                qs = qs.filter(name__icontains=q)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter_form"] = forms.PositionFilterForm(self.request.GET)
+        return context
 
 
 class PositionDetailView(LoginRequiredMixin, generic.DetailView):

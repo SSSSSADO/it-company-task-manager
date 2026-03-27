@@ -13,12 +13,10 @@
 <body>
 
 <header>
-    <!-- Левый блок: название сайта -->
     <div class="header-left">
         <a href="{% url 'manager:index' %}"><strong>Taxi Service</strong></a>
     </div>
 
-    <!-- Центр: меню -->
     <div class="header-center">
         {% if user.is_authenticated %}
             <a href="{% url 'manager:task-list' %}">Tasks</a>
@@ -28,7 +26,6 @@
         {% endif %}
     </div>
 
-    <!-- Правый блок: Login / Logout -->
     <div class="header-right">
         {% if user.is_authenticated %}
             <form method="post" action="{% url 'manager:logout' %}">
@@ -42,7 +39,6 @@
     </div>
 </header>
 
-<!-- Контент по центру (6/12 колонки) -->
 <div class="content-container">
   {% block content %}
   {% endblock %}

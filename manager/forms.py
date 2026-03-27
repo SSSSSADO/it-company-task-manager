@@ -39,3 +39,38 @@ class TaskForm(forms.ModelForm):
         widgets = {
             "description": forms.Textarea()
         }
+
+
+class TaskFilterForm(forms.Form):
+    q = forms.CharField(required=False, label="Search")  # поиск по имени
+    is_completed = forms.ChoiceField(
+        required=False,
+        choices=[("", "All"), ("1", "Completed"), ("0", "Open")],
+        label="Status"
+    )
+    priority = forms.ChoiceField(
+        required=False,
+        choices=[("", "All")] + list(Task.Priority.choices),
+        label="Priority"
+    )
+    task_type = forms.ModelChoiceField(
+        queryset=TaskType.objects.all(),
+        required=False,
+        label="Task Type"
+    )
+
+class WorkerFilterForm(forms.Form):
+    q = forms.CharField(required=False, label="Search")
+    position = forms.ModelChoiceField(
+        queryset=Position.objects.all(),
+        required=False,
+        label="Position"
+    )
+
+
+class TaskTypeFilterForm(forms.Form):
+    q = forms.CharField(required=False, label="Search")
+
+
+class PositionFilterForm(forms.Form):
+    q = forms.CharField(required=False, label="Search")
