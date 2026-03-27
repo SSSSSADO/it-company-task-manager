@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  {% load static %}
   {% block title %}
     <title>Taxi Service</title>
   {% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
 
-<header style="padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center;">
+<header>
+    <!-- Левый блок: название сайта -->
+    <div class="header-left">
+        <a href="{% url 'manager:index' %}"><strong>Taxi Service</strong></a>
+    </div>
 
-  <div>
-    <a href="{% url 'manager:index' %}"><strong>Manager</strong></a>
-  </div>
+    <!-- Центр: меню -->
+    <div class="header-center">
+        {% if user.is_authenticated %}
+            <a href="{% url 'manager:task-list' %}">Tasks</a>
+            <a href="{% url 'manager:worker-list' %}">Workers</a>
+            <a href="{% url 'manager:position-list' %}">Positions</a>
+            <a href="{% url 'manager:task-type-list' %}">Task Types</a>
+        {% endif %}
+    </div>
 
-  <nav style="display: flex; gap: 15px;">
-
-    {% if user.is_authenticated %}
-      <a href="{% url 'manager:task-list' %}">Tasks</a>
-      <a href="{% url 'manager:worker-list' %}">Workers</a>
-      <a href="{% url 'manager:position-list' %}">Positions</a>
-      <a href="{% url 'manager:task-type-list' %}">Task Types</a>
-
-      <!-- Logout -->
-      <form method="post" action="{% url 'manager:logout' %}" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-      </form>
-
-    {% else %}
-      <a href="{% url 'manager:login' %}">Login</a>
-      <a href="{% url 'manager:register' %}">Register</a>
-    {% endif %}
-
-  </nav>
+    <!-- Правый блок: Login / Logout -->
+    <div class="header-right">
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'manager:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'manager:login' %}">Login</a>
+            <a href="{% url 'manager:register' %}">Register</a>
+        {% endif %}
+    </div>
 </header>
 
-<div style="padding: 20px;">
+<!-- Контент по центру (6/12 колонки) -->
+<div class="content-container">
   {% block content %}
   {% endblock %}
 </div>
