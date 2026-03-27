@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Worker Detail</title>
+{% endblock %}
+
+{% block content %}
+  <h3>{{ worker.username }}</h3>
+  <p>
+    Position:
+    <a href="{{ worker.position.get_absolute_url }}">{{ worker.position }}</a>
+  </p>
+  <p>Full name: {{ worker.first_name }} {{ worker.last_name }}</p>
+  <p>Email: {{ worker.email }}</p>
+  {% if worker.tasks.all %}
+    Working on the following tasks:
+    <ul>
+      {% for task in worker.tasks.all %}
+        <li>
+          <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    There are no active tasks
+  {% endif %}
+{% endblock %}

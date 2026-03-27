@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task Type Detail</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ task_type.name }}</h1>
+  <a href="{% url 'manager:task-type-update' pk=task_type.id %}">Update Task Type</a>
+  <br>
+  {% if task_type.tasks.all %}
+    <h3>All task with this type:</h3>
+    <ul>
+      {% for task in task_type.tasks.all %}
+        <li>
+          <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    There are no tasks of this type
+  {% endif %}
+  <br>
+  <a href="{% url 'manager:task-type-delete' pk=task_type.id %}">Delete this Task Type</a>
+{% endblock %}

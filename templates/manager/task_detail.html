@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task Detail</title>
+{% endblock %}
+
+{% block content %}
+  <h2>
+    {{ task.name }} (
+    {% if task.is_completed %}
+      Done
+    {% else %}
+      In process
+    {% endif %})
+  </h2>
+  <p>Priority: {{ task.priority }}</p>
+  <p>Deadline: {{ task.deadline }}</p>
+  <p>Description: {{ task.description }}</p>
+  <p>
+    Task type:
+    <a href="{{ task.task_type.get_absolute_url }}">{{ task.task_type }}</a>
+  </p>
+  {% if task.assignees %}
+    Workers:
+    <ul>
+      {% for assignee in task.assignees.all %}
+        <li>
+          <a href="{{ assignee.get_absolute_url }}">{{ assignee.username }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    Nobody is doing this task
+  {% endif %}
+  <a href="{% url 'manager:task-update' pk=task.id %}">Update this Task</a>
+  <br>
+  <a href="{% url 'manager:task-delete' pk=task.id %}">Delete this Task</a>
+{% endblock %}

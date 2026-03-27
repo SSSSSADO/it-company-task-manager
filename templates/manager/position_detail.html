@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Position Detail</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ position.name }}</h1>
+  <a href="{% url 'manager:position-update' pk=position.id %}">Update Position</a>
+  <br>
+  {% if position.workers.all %}
+    <ul>
+      {% for worker in position.workers.all %}
+        <li>
+          <a href="{{ worker.get_absolute_url }}">{{ worker.username }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    There are no employees in this position.
+  {% endif %}
+  <br>
+  <a href="{% url 'manager:position-delete' pk=position.id %}">Delete this position</a>
+{% endblock %}

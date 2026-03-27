@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task Type List</title>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="get" class="filter-form">
+    {{ filter_form.q.label_tag }} {{ filter_form.q }}
+    <input type="submit" value="Filter">
+  </form>
+
+  <a href="{% url 'manager:task-type-create' %}">Create Task Type</a>
+  {% if task_type_list %}
+    <ul>
+      {% for task_type in task_type_list %}
+        <li>
+          <a href="{% url 'manager:task-type-detail' pk=task_type.id %}">{{ task_type.name }}</a>
+          ({{ task_type.tasks.count }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No task type found</h3>
+  {% endif %}
+{% endblock %}

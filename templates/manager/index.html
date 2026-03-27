@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Home Page</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Home Page</h1>
+  <ul>
+    <li>
+      {{ num_workers }} Workers
+    </li>
+    <li>
+      {{ num_positions }} Positions
+    </li>
+    <li>
+      {{ num_tasks }} Tasks
+    </li>
+    <li>
+      {{ num_completed_tasks }} Completed tasks
+    </li>
+    <li>
+      {{ num_open_tasks }} Open tasks
+    </li>
+  </ul>
+{% endblock %}

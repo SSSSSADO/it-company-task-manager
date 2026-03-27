@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task List</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Tasks</h1>
+
+  <form method="get">
+    {{ filter_form.q.label_tag }} {{ filter_form.q }}
+    {{ filter_form.is_completed.label_tag }} {{ filter_form.is_completed }}
+    {{ filter_form.priority.label_tag }} {{ filter_form.priority }}
+    {{ filter_form.task_type.label_tag }} {{ filter_form.task_type }}
+    <button type="submit">Filter</button>
+  </form>
+  <a href="{% url 'manager:task-create' %}">Create new Task</a>
+  <ul>
+    {% for task in tasks %}
+      <li>
+        <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
+        - {{ task.priority }} - {{ task.is_completed|yesno:"Done,Open" }}
+      </li>
+    {% empty %}
+      <li>No tasks found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

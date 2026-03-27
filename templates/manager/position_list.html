@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Position List</title>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="get" class="filter-form">
+    {{ filter_form.q.label_tag }} {{ filter_form.q }}
+    <input type="submit" value="Filter">
+  </form>
+
+  <a href="{% url 'manager:position-create' %}">Create Position</a>
+  {% if position_list %}
+    <ul>
+      {% for position in position_list %}
+        <li>
+          <a href="{% url 'manager:position-detail' pk=position.id %}">{{ position.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>No positions found</h3>
+  {% endif %}
+{% endblock %}

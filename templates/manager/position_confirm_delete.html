@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Delete Position</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Delete position: {{ position.name }}</h1>
+  <p>Are you sure you want to delete this position?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}
