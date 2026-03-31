@@ -3,7 +3,7 @@
 <head>
   {% load static %}
   {% block title %}
-    <title>Taxi Service</title>
+    <title>Task Manager</title>
   {% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,30 +13,30 @@
 <body>
 
 <header>
-    <div class="header-left">
-        <a href="{% url 'manager:index' %}"><strong>Taxi Service</strong></a>
-    </div>
+  <div class="header-left">
+    <a href="{% url 'manager:index' %}"><strong>Task Manager</strong></a>
+  </div>
 
-    <div class="header-center">
-        {% if user.is_authenticated %}
-            <a href="{% url 'manager:task-list' %}">Tasks</a>
-            <a href="{% url 'manager:worker-list' %}">Workers</a>
-            <a href="{% url 'manager:position-list' %}">Positions</a>
-            <a href="{% url 'manager:task-type-list' %}">Task Types</a>
-        {% endif %}
-    </div>
+  <div class="header-center">
+    {% if user.is_authenticated %}
+      <a href="{% url 'manager:task-list' %}">Tasks</a>
+      <a href="{% url 'manager:worker-list' %}">Workers</a>
+      <a href="{% url 'manager:position-list' %}">Positions</a>
+      <a href="{% url 'manager:task-type-list' %}">Task Types</a>
+    {% endif %}
+  </div>
 
-    <div class="header-right">
-        {% if user.is_authenticated %}
-            <form method="post" action="{% url 'manager:logout' %}">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        {% else %}
-            <a href="{% url 'manager:login' %}">Login</a>
-            <a href="{% url 'manager:register' %}">Register</a>
-        {% endif %}
-    </div>
+  <div class="header-right">
+    {% if user.is_authenticated %}
+      <form method="post" action="{% url 'manager:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+    {% else %}
+      <a href="{% url 'manager:login' %}">Login</a>
+      <a href="{% url 'manager:register' %}">Register</a>
+    {% endif %}
+  </div>
 </header>
 
 <div class="content-container">

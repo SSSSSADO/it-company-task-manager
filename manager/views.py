@@ -1,8 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.db.models import Q
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.db.models import Q, Count
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -10,15 +8,24 @@ from manager.models import Position, Worker, TaskType, Task
 from manager import forms
 
 
-def index(request: HttpRequest) -> HttpResponse:
-    context = {
-        "num_workers": Worker.objects.count(),
-        "num_tasks": Task.objects.count(),
-        "num_positions": Position.objects.count(),
-        "num_completed_tasks": Task.objects.filter(is_completed=True).count(),
-        "num_open_tasks": Task.objects.filter(is_completed=False).count(),
-    }
-    return render(request, "manager/index.html", context=context)
+class IndexView(generic.TemplateView):
+    template_name = "manager/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task_stats = Task.objects.aggregate(
+            total=Count("id"),
+            completed=Count("id", filter=Q(is_completed=True)),
+            open=Count("id", filter=Q(is_completed=False)),
+        )
+        context.update({
+            "num_workers": Worker.objects.count(),
+            "num_positions": Position.objects.count(),
+            "num_tasks": task_stats["total"],
+            "num_completed_tasks": task_stats["completed"],
+            "num_open_tasks": task_stats["open"],
+        })
+        return context
 
 
 class CustomLoginView(LoginView):
