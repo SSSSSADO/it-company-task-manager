@@ -1,0 +1,231 @@
+[
+{
+    "model": "manager.position",
+    "pk": 1,
+    "fields": {
+        "name": "DEVELOPER"
+    }
+},
+{
+    "model": "manager.position",
+    "pk": 2,
+    "fields": {
+        "name": "Project Manager"
+    }
+},
+{
+    "model": "manager.position",
+    "pk": 3,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "manager.position",
+    "pk": 4,
+    "fields": {
+        "name": "Designer"
+    }
+},
+{
+    "model": "manager.position",
+    "pk": 5,
+    "fields": {
+        "name": "DevOps"
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$BneGeQPnxKeBQuagW5kKdv$Tos1cOxkfhVcQivCaVQOk/MSrUw/SckYkb6kIeW3IZo=",
+        "last_login": "2026-03-27T06:14:55.941Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@mail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-03-25T21:08:51.343Z",
+        "position": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 2,
+    "fields": {
+        "password": "123sado123",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "SSSSSADO",
+        "first_name": "Moris",
+        "last_name": "Sado",
+        "email": "morissado@mail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-25T22:02:43Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 3,
+    "fields": {
+        "password": "123john1234",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "John",
+        "first_name": "John",
+        "last_name": "Miller",
+        "email": "johnmiller@mail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-25T22:05:22Z",
+        "position": 4,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 4,
+    "fields": {
+        "password": "123anton123",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "chigurh",
+        "first_name": "Anton",
+        "last_name": "Chigurh",
+        "email": "antonchigurh@mail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-25T22:43:11Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ofb8ApXteWhjgt3lsorozc$8bhGw9rb8VmvmoXh3p7XOc10V3E00sfxnT3ggQiI0Jc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Test",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-27T00:42:14.086Z",
+        "position": 5,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.worker",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$pb8xfxPg851cbNZ1prOd3G$AU1OXVjnY24/L5+3fn+wia8OoqkZdIaCRx/GtHK2a0o=",
+        "last_login": "2026-03-31T05:55:28.956Z",
+        "is_superuser": false,
+        "username": "sadosadosado",
+        "first_name": "Morisso",
+        "last_name": "Sadosso",
+        "email": "grushkovik.danil@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-31T05:55:15.278Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "manager.tasktype",
+    "pk": 1,
+    "fields": {
+        "name": "Bug"
+    }
+},
+{
+    "model": "manager.tasktype",
+    "pk": 2,
+    "fields": {
+        "name": "New Feature"
+    }
+},
+{
+    "model": "manager.tasktype",
+    "pk": 3,
+    "fields": {
+        "name": "Breaking Change"
+    }
+},
+{
+    "model": "manager.tasktype",
+    "pk": 4,
+    "fields": {
+        "name": "Refactoring"
+    }
+},
+{
+    "model": "manager.tasktype",
+    "pk": 5,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "manager.task",
+    "pk": 1,
+    "fields": {
+        "name": "Fix DashBoard for Vacancies",
+        "description": "Some description...",
+        "deadline": "2026-07-15",
+        "is_completed": false,
+        "priority": "LOW",
+        "task_type": 1,
+        "assignees": [
+            3
+        ]
+    }
+},
+{
+    "model": "manager.task",
+    "pk": 2,
+    "fields": {
+        "name": "Add sign-in with Google button",
+        "description": "Some description...",
+        "deadline": "2026-03-31",
+        "is_completed": false,
+        "priority": "HIGH",
+        "task_type": 2,
+        "assignees": [
+            2
+        ]
+    }
+},
+{
+    "model": "manager.task",
+    "pk": 3,
+    "fields": {
+        "name": "Testing home page",
+        "description": "Some description...",
+        "deadline": "2026-03-24",
+        "is_completed": true,
+        "priority": "MEDIUM",
+        "task_type": 5,
+        "assignees": [
+            4
+        ]
+    }
+}
+]
