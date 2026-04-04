@@ -35,4 +35,11 @@ python manage.py runserver
 
 SSSSSADO
 
+## render.com
+
+https://it-company-task-manager-p4kl.onrender.com
+
+username: user
+password: user12345
+
 ![Website Interface](demo.png)
