@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Position Detail</title>
-{% endblock %}
+{% block title %}<title>{{ position.name }} — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>{{ position.name }}</h1>
-  <a href="{% url 'manager:position-update' pk=position.id %}">Update Position</a>
-  <br>
+  <div class="page-header">
+    <div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em;">
+        <a href="{% url 'manager:position-list' %}">Positions</a> /
+      </p>
+      <h1 style="margin-bottom:0;">{{ position.name }}</h1>
+    </div>
+    <a href="{% url 'manager:position-update' pk=position.id %}" class="btn btn-ghost">✎ Edit</a>
+  </div>
+
   {% if position.workers.all %}
-    <ul>
+    <h3>Workers in this position</h3>
+    <ul class="item-list" style="margin-bottom:28px;">
       {% for worker in position.workers.all %}
         <li>
-          <a href="{{ worker.get_absolute_url }}">{{ worker.username }}</a>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="user-avatar" style="width:32px;height:32px;font-size:13px;">{{ worker.username|first|upper }}</span>
+            <a href="{{ worker.get_absolute_url }}" class="item-name">{{ worker.username }}</a>
+          </div>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    There are no employees in this position.
+    <p style="color:var(--text-muted);margin-bottom:28px;">No workers in this position yet.</p>
   {% endif %}
-  <br>
-  <a href="{% url 'manager:position-delete' pk=position.id %}">Delete this position</a>
+
+  <hr class="divider">
+  <a href="{% url 'manager:position-delete' pk=position.id %}" class="btn btn-danger">⊗ Delete Position</a>
 {% endblock %}
+

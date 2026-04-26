@@ -1,28 +1,59 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Task List</title>
-{% endblock %}
+{% block title %}<title>Tasks — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>Tasks</h1>
+  <div class="page-header">
+    <h1 class="page-title">⊞ Tasks</h1>
+    <a href="{% url 'manager:task-create' %}" class="btn btn-primary">+ New Task</a>
+  </div>
 
-  <form method="get">
-    {{ filter_form.q.label_tag }} {{ filter_form.q }}
-    {{ filter_form.is_completed.label_tag }} {{ filter_form.is_completed }}
-    {{ filter_form.priority.label_tag }} {{ filter_form.priority }}
-    {{ filter_form.task_type.label_tag }} {{ filter_form.task_type }}
-    <button type="submit">Filter</button>
+  <form method="get" class="filter-form">
+    <div class="filter-group">
+      {{ filter_form.q.label_tag }}
+      {{ filter_form.q }}
+    </div>
+    <div class="filter-group">
+      {{ filter_form.is_completed.label_tag }}
+      {{ filter_form.is_completed }}
+    </div>
+    <div class="filter-group">
+      {{ filter_form.priority.label_tag }}
+      {{ filter_form.priority }}
+    </div>
+    <div class="filter-group">
+      {{ filter_form.task_type.label_tag }}
+      {{ filter_form.task_type }}
+    </div>
+    <button type="submit" class="btn btn-ghost btn-sm">Filter</button>
   </form>
-  <a href="{% url 'manager:task-create' %}">Create new Task</a>
-  <ul>
+
+  <ul class="item-list">
     {% for task in tasks %}
       <li>
-        <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
-        - {{ task.priority }} - {{ task.is_completed|yesno:"Done,Open" }}
+        <a href="{{ task.get_absolute_url }}" class="item-name">{{ task.name }}</a>
+        <div class="item-meta">
+          {% if task.priority == "URGENT" %}
+            <span class="badge badge-urgent">Urgent</span>
+          {% elif task.priority == "HIGH" %}
+            <span class="badge badge-high">High</span>
+          {% elif task.priority == "MEDIUM" %}
+            <span class="badge badge-medium">Medium</span>
+          {% else %}
+            <span class="badge badge-low">Low</span>
+          {% endif %}
+          {% if task.is_completed %}
+            <span class="badge badge-done">Done</span>
+          {% else %}
+            <span class="badge badge-open">Open</span>
+          {% endif %}
+        </div>
       </li>
     {% empty %}
-      <li>No tasks found.</li>
+      <div class="empty-state">
+        <div class="empty-state-icon">⊞</div>
+        <p class="empty-state-text">No tasks found. <a href="{% url 'manager:task-create' %}">Create one?</a></p>
+      </div>
     {% endfor %}
   </ul>
 {% endblock %}

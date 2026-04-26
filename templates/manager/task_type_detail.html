@@ -1,25 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Task Type Detail</title>
-{% endblock %}
+{% block title %}<title>{{ task_type.name }} — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>{{ task_type.name }}</h1>
-  <a href="{% url 'manager:task-type-update' pk=task_type.id %}">Update Task Type</a>
-  <br>
+  <div class="page-header">
+    <div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em;">
+        <a href="{% url 'manager:task-type-list' %}">Task Types</a> /
+      </p>
+      <h1 style="margin-bottom:0;">{{ task_type.name }}</h1>
+    </div>
+    <a href="{% url 'manager:task-type-update' pk=task_type.id %}" class="btn btn-ghost">✎ Edit</a>
+  </div>
+
   {% if task_type.tasks.all %}
-    <h3>All task with this type:</h3>
-    <ul>
+    <h3>Tasks of this type</h3>
+    <ul class="item-list" style="margin-bottom:28px;">
       {% for task in task_type.tasks.all %}
         <li>
-          <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
+          <a href="{{ task.get_absolute_url }}" class="item-name">{{ task.name }}</a>
+          <div class="item-meta">
+            {% if task.is_completed %}
+              <span class="badge badge-done">Done</span>
+            {% else %}
+              <span class="badge badge-open">Open</span>
+            {% endif %}
+          </div>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    There are no tasks of this type
+    <p style="color:var(--text-muted);margin-bottom:28px;">No tasks of this type yet.</p>
   {% endif %}
-  <br>
-  <a href="{% url 'manager:task-type-delete' pk=task_type.id %}">Delete this Task Type</a>
+
+  <hr class="divider">
+  <a href="{% url 'manager:task-type-delete' pk=task_type.id %}" class="btn btn-danger">⊗ Delete Task Type</a>
 {% endblock %}
