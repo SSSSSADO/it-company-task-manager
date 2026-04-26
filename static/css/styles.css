@@ -500,7 +500,7 @@ input[type="submit"]:hover {
   flex-shrink: 0;
 }
 
-/* ===== BADGES / TAGS ===== */
+/* BADGES / TAGS (type) */
 .badge {
   display: inline-flex;
   align-items: center;
