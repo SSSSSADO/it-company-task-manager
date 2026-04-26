@@ -686,6 +686,81 @@ input[type="submit"]:hover {
   color: var(--text-secondary);
 }
 
+/* логин батон */
+.btn-login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  overflow: hidden;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #080810;
+  background: linear-gradient(135deg, #6ee7f7 0%, #a78bfa 100%);
+  box-shadow:
+    0 0 24px rgba(110, 231, 247, 0.35),
+    0 0 60px rgba(167, 139, 250, 0.15),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+}
+
+/* Блик сверху */
+.btn-login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 36px rgba(110, 231, 247, 0.5),
+    0 0 80px rgba(167, 139, 250, 0.25),
+    0 8px 30px rgba(0, 0, 0, 0.35);
+  filter: brightness(1.08);
+}
+
+.btn-login:active {
+  transform: translateY(0px);
+  box-shadow:
+    0 0 16px rgba(110, 231, 247, 0.3),
+    0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.btn-login__text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Стрелка сдвиг плавно */
+.btn-login__arrow {
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-login:hover .btn-login__arrow {
+  transform: translateX(5px);
+}
+
 /* ===== HELPTEXT ===== */
 .helptext, span.helptext {
   display: block;
