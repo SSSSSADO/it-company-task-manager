@@ -58,8 +58,25 @@
     {% block content %}{% endblock %}
   </div>
 </main>
+<script>
+  // Замена этой хуеты "--------" на choose position (не стал создавать отдельный js скрипт)
+  document.addEventListener('DOMContentLoaded', function() {
+    const labels = {
+      'id_position': 'Choose position',
+      'id_task_type': 'Choose task type'
+      'id_priority': 'Choose priority'
+    };
+    document.querySelectorAll('select').forEach(function(sel) {
+      const placeholder = labels[sel.id] || 'Choose option';
+      sel.querySelectorAll('option').forEach(function(opt) {
+        if (opt.value === '' || /^-+$/.test(opt.text.trim())) {
+          opt.text = placeholder;
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
 
-<!-- Как же я заебался это писал еще и искать как сделать то то -->
