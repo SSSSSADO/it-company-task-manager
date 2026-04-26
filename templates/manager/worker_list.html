@@ -35,6 +35,11 @@
             </div>
           </div>
           <span style="color:var(--text-muted);font-size:13px;">{{ worker.position|default:"No position" }}</span>
+          <a href="{% url 'manager:worker-detail' pk=worker.id %}">
+            {{ worker.username }}
+          </a>
+         - {{ worker.position }}
+
         </li>
       {% endfor %}
     </ul>
