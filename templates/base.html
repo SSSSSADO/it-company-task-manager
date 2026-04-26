@@ -58,12 +58,13 @@
     {% block content %}{% endblock %}
   </div>
 </main>
+
 <script>
   // Замена этой хуеты "--------" на choose position (не стал создавать отдельный js скрипт)
   document.addEventListener('DOMContentLoaded', function() {
     const labels = {
       'id_position': 'Choose position',
-      'id_task_type': 'Choose task type'
+      'id_task_type': 'Choose task type',
       'id_priority': 'Choose priority'
     };
     document.querySelectorAll('select').forEach(function(sel) {
