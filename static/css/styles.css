@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+/* reset base */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -44,7 +44,7 @@ body {
   line-height: 1.6;
 }
 
-/* ===== NAVBAR ===== */
+/* navbar */
 .navbar {
   position: sticky;
   top: 0;
@@ -144,7 +144,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ===== BUTTONS ===== */
+/* buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -213,7 +213,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* main content */
 .main-content {
   padding: 36px 24px 60px;
   max-width: 900px;
@@ -236,7 +236,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* typography */
 h1 {
   font-family: 'Syne', sans-serif;
   font-size: 28px;
@@ -269,7 +269,7 @@ p { color: var(--text-secondary); margin-bottom: 12px; }
 a { color: var(--accent); text-decoration: none; transition: var(--transition); }
 a:hover { color: var(--text-primary); }
 
-/* ===== PAGE HEADER ===== */
+/* header */
 .page-header {
   display: flex;
   align-items: center;
@@ -288,7 +288,7 @@ a:hover { color: var(--text-primary); }
   margin-bottom: 0;
 }
 
-/* ===== FORMS ===== */
+/* forms */
 .form-group {
   margin-bottom: 20px;
 }
@@ -500,7 +500,7 @@ input[type="submit"]:hover {
   flex-shrink: 0;
 }
 
-/* BADGES / TAGS (type) */
+/* badges/tags */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -519,7 +519,7 @@ input[type="submit"]:hover {
 .badge-medium { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(251,191,36,0.2); }
 .badge-low { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
 
-/* ===== STAT CARDS ===== */
+/* stat cards */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -569,7 +569,7 @@ input[type="submit"]:hover {
   position: relative;
 }
 
-/* ===== DETAIL VIEW ===== */
+/* detail views */
 .detail-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -601,14 +601,14 @@ input[type="submit"]:hover {
 
 .detail-field.full-width { grid-column: 1 / -1; }
 
-/* ===== DIVIDERS ===== */
+/* dividers */
 .divider {
   border: none;
   border-top: 1px solid var(--glass-border);
   margin: 28px 0;
 }
 
-/* ===== EMPTY STATE ===== */
+/* empty state*/
 .empty-state {
   text-align: center;
   padding: 48px 24px;
@@ -618,7 +618,7 @@ input[type="submit"]:hover {
 .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
 .empty-state-text { font-size: 15px; }
 
-/* ===== DANGER ZONE ===== */
+/* danger zone */
 .danger-zone {
   padding: 24px;
   background: var(--danger-bg);
@@ -633,7 +633,7 @@ input[type="submit"]:hover {
   font-size: 14px;
 }
 
-/* ===== AUTH PAGES ===== */
+/* auth pages */
 .auth-wrapper {
   max-width: 420px;
   margin: 0 auto;
@@ -686,7 +686,7 @@ input[type="submit"]:hover {
   color: var(--text-secondary);
 }
 
-/* ===== helptext blyad' ===== */
+/* ===== HELPTEXT ===== */
 .helptext, span.helptext {
   display: block;
   font-size: 11px;
@@ -695,7 +695,7 @@ input[type="submit"]:hover {
   line-height: 1.5;
 }
 
-/* ===== SCROLLBAR ===== */
+/* scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
@@ -710,4 +710,50 @@ input[type="submit"]:hover {
   .detail-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   h1 { font-size: 22px; }
+}
+
+
+/* логин батон*/
+.btn-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #0a0a14;
+  background: linear-gradient(135deg, var(--accent) 0%, #38bdf8 100%);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transition: var(--transition);
+}
+
+.btn-login:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.3);
+  filter: brightness(1.08);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+.btn-login__text { position: relative; }
+
+.btn-login__arrow {
+  font-size: 16px;
+  display: inline-block;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-login:hover .btn-login__arrow {
+  transform: translateX(4px);
 }
