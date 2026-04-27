@@ -2,47 +2,82 @@
 <html lang="en">
 <head>
   {% load static %}
-  {% block title %}
-    <title>Task Manager</title>
-  {% endblock %}
+  {% block title %}<title>Task Manager</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
 
-<header>
-  <div class="header-left">
-    <a href="{% url 'manager:index' %}"><strong>Task Manager</strong></a>
-  </div>
+<nav class="navbar">
+  <a href="{% url 'manager:index' %}" class="nav-logo">
+    <span class="logo-icon">◈</span>
+    <span class="logo-text">Task Manager</span>
+  </a>
 
-  <div class="header-center">
+  <div class="nav-links">
     {% if user.is_authenticated %}
-      <a href="{% url 'manager:task-list' %}">Tasks</a>
-      <a href="{% url 'manager:worker-list' %}">Workers</a>
-      <a href="{% url 'manager:position-list' %}">Positions</a>
-      <a href="{% url 'manager:task-type-list' %}">Task Types</a>
+      <a href="{% url 'manager:task-list' %}" class="nav-link">
+        <span class="nav-icon">⊞</span> Tasks
+      </a>
+      <a href="{% url 'manager:worker-list' %}" class="nav-link">
+        <span class="nav-icon">◉</span> Workers
+      </a>
+      <a href="{% url 'manager:position-list' %}" class="nav-link">
+        <span class="nav-icon">⬡</span> Positions
+      </a>
+      <a href="{% url 'manager:task-type-list' %}" class="nav-link">
+        <span class="nav-icon">◈</span> Task Types
+      </a>
     {% endif %}
   </div>
 
-  <div class="header-right">
+  <div class="nav-actions">
     {% if user.is_authenticated %}
-      <form method="post" action="{% url 'manager:logout' %}">
+      <span class="nav-user">
+        <span class="user-avatar">{{ user.username|first|upper }}</span>
+        {{ user.username }}
+      </span>
+      <form method="post" action="{% url 'manager:logout' %}" style="display:inline;">
         {% csrf_token %}
-        <button type="submit">Logout</button>
+        <button type="submit" class="btn btn-ghost btn-sm">Sign out</button>
       </form>
     {% else %}
-      <a href="{% url 'manager:login' %}">Login</a>
-      <a href="{% url 'manager:register' %}">Register</a>
+      <a href="{% url 'manager:login' %}" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="{% url 'manager:register' %}" class="btn btn-primary btn-sm">Register</a>
     {% endif %}
   </div>
-</header>
+</nav>
 
-<div class="content-container">
-  {% block content %}
-  {% endblock %}
-</div>
+<main class="main-content">
+  <div class="content-card">
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<script>
+  // Замена этой хуеты "--------" на choose position (не стал создавать отдельный js скрипт)
+  document.addEventListener('DOMContentLoaded', function() {
+    const labels = {
+      'id_position': 'Choose position',
+      'id_task_type': 'Choose task type',
+      'id_priority': 'Choose priority'
+    };
+    document.querySelectorAll('select').forEach(function(sel) {
+      const placeholder = labels[sel.id] || 'Choose option';
+      sel.querySelectorAll('option').forEach(function(opt) {
+        if (opt.value === '' || /^-+$/.test(opt.text.trim())) {
+          opt.text = placeholder;
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
+

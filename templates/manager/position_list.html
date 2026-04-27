@@ -1,25 +1,34 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Position List</title>
-{% endblock %}
+{% block title %}<title>Positions — TaskOS</title>{% endblock %}
 
 {% block content %}
+  <div class="page-header">
+    <h1 class="page-title">⬡ Positions</h1>
+    <a href="{% url 'manager:position-create' %}" class="btn btn-primary">+ New Position</a>
+  </div>
+
   <form action="" method="get" class="filter-form">
-    {{ filter_form.q.label_tag }} {{ filter_form.q }}
-    <input type="submit" value="Filter">
+    <div class="filter-group">
+      {{ filter_form.q.label_tag }}
+      {{ filter_form.q }}
+    </div>
+    <input type="submit" value="Filter" style="align-self:flex-end;">
   </form>
 
-  <a href="{% url 'manager:position-create' %}">Create Position</a>
   {% if position_list %}
-    <ul>
+    <ul class="item-list">
       {% for position in position_list %}
         <li>
-          <a href="{% url 'manager:position-detail' pk=position.id %}">{{ position.name }}</a>
+          <a href="{% url 'manager:position-detail' pk=position.id %}" class="item-name">{{ position.name }}</a>
+          <span style="color:var(--text-muted);font-size:13px;">{{ position.workers.count }} worker{{ position.workers.count|pluralize }}</span>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <h3>No positions found</h3>
+    <div class="empty-state">
+      <div class="empty-state-icon">⬡</div>
+      <p class="empty-state-text">No positions found. <a href="{% url 'manager:position-create' %}">Create one?</a></p>
+    </div>
   {% endif %}
 {% endblock %}

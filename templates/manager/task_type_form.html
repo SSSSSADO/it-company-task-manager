@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Task Type Form</title>
-{% endblock %}
+{% block title %}<title>{% if object %}Edit{% else %}New{% endif %} Task Type — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} task type {{ object.name }}</h1>
+  <div class="page-header">
+    <h1 class="page-title">{% if object %}✎ Edit Task Type{% else %}+ New Task Type{% endif %}</h1>
+  </div>
 
-  <form action="" method="post">
+  <form action="" method="post" style="max-width:480px;">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <div class="btn-group" style="margin-top:8px;">
+      <input type="submit" value="{% if object %}Save Changes{% else %}Create Type{% endif %}">
+      <a href="{% url 'manager:task-type-list' %}" class="btn btn-ghost">Cancel</a>
+    </div>
   </form>
 {% endblock %}

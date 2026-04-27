@@ -1,28 +1,49 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Worker List</title>
-{% endblock %}
+{% block title %}<title>Workers</title>{% endblock %}
 
 {% block content %}
+  <div class="page-header">
+    <h1 class="page-title">◉ Workers</h1>
+  </div>
+
   <form action="" method="get" class="filter-form">
-    {{ filter_form.q.label_tag }} {{ filter_form.q }}
-    {{ filter_form.position.label_tag }} {{ filter_form.position }}
-    <input type="submit" value="Filter">
+    <div class="filter-group">
+      {{ filter_form.q.label_tag }}
+      {{ filter_form.q }}
+    </div>
+    <div class="filter-group">
+      {{ filter_form.position.label_tag }}
+      {{ filter_form.position }}
+    </div>
+    <input type="submit" value="Filter" style="align-self:flex-end;">
   </form>
 
   {% if worker_list %}
-    <ul>
+    <ul class="item-list">
       {% for worker in worker_list %}
         <li>
-          <a href="{% url 'manager:worker-detail' pk=worker.id %}">
-            {{ worker.username }}
-          </a>
-         - {{ worker.position }}
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="user-avatar">{{ worker.username|first|upper }}</span>
+            <div>
+              <a href="{% url 'manager:worker-detail' pk=worker.id %}" class="item-name" style="display:block;">
+                {{ worker.username }}
+              </a>
+              {% if worker.first_name or worker.last_name %}
+                <span style="font-size:12px;color:var(--text-muted);">{{ worker.first_name }} {{ worker.last_name }}</span>
+              {% endif %}
+            </div>
+          </div>
+          {% if worker.position %}
+            <span style="color:var(--text-secondary);font-size:13px;font-weight:500;">{{ worker.position.name }}</span>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <h3>No workers found</h3>
+    <div class="empty-state">
+      <div class="empty-state-icon">◉</div>
+      <p class="empty-state-text">No workers found.</p>
+    </div>
   {% endif %}
 {% endblock %}

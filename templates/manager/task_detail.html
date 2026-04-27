@@ -1,38 +1,75 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Task Detail</title>
-{% endblock %}
+{% block title %}<title>{{ task.name }} — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h2>
-    {{ task.name }} (
-    {% if task.is_completed %}
-      Done
-    {% else %}
-      In process
-    {% endif %})
-  </h2>
-  <p>Priority: {{ task.priority }}</p>
-  <p>Deadline: {{ task.deadline }}</p>
-  <p>Description: {{ task.description }}</p>
-  <p>
-    Task type:
-    <a href="{{ task.task_type.get_absolute_url }}">{{ task.task_type }}</a>
-  </p>
-  {% if task.assignees %}
-    Workers:
-    <ul>
+  <div class="page-header">
+    <div>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">
+        <a href="{% url 'manager:task-list' %}">Tasks</a> /
+      </p>
+      <h1 style="margin-bottom:0;">{{ task.name }}</h1>
+    </div>
+    <div class="btn-group">
+      {% if task.is_completed %}
+        <span class="badge badge-done" style="font-size:13px; padding:5px 14px;">✓ Done</span>
+      {% else %}
+        <span class="badge badge-open" style="font-size:13px; padding:5px 14px;">In Progress</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-field">
+      <div class="detail-label">Priority</div>
+      <div class="detail-value">
+        {% if task.priority == "URGENT" %}<span class="badge badge-urgent">Urgent</span>
+        {% elif task.priority == "HIGH" %}<span class="badge badge-high">High</span>
+        {% elif task.priority == "MEDIUM" %}<span class="badge badge-medium">Medium</span>
+        {% else %}<span class="badge badge-low">Low</span>{% endif %}
+      </div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-label">Deadline</div>
+      <div class="detail-value">{{ task.deadline }}</div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-label">Task Type</div>
+      <div class="detail-value">
+        <a href="{{ task.task_type.get_absolute_url }}">{{ task.task_type }}</a>
+      </div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-label">Status</div>
+      <div class="detail-value">{{ task.is_completed|yesno:"Completed,In Progress" }}</div>
+    </div>
+    <div class="detail-field full-width">
+      <div class="detail-label">Description</div>
+      <div class="detail-value" style="white-space:pre-wrap; font-size:14px; line-height:1.7;">{{ task.description }}</div>
+    </div>
+  </div>
+
+  {% if task.assignees.all %}
+    <h3>Assigned Workers</h3>
+    <ul class="item-list" style="margin-bottom:28px;">
       {% for assignee in task.assignees.all %}
         <li>
-          <a href="{{ assignee.get_absolute_url }}">{{ assignee.username }}</a>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="user-avatar" style="width:32px;height:32px;font-size:13px;">{{ assignee.username|first|upper }}</span>
+            <a href="{{ assignee.get_absolute_url }}" class="item-name">{{ assignee.username }}</a>
+          </div>
+          <span style="color:var(--text-muted);font-size:13px;">{{ assignee.position }}</span>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    Nobody is doing this task
+    <p style="color:var(--text-muted); margin-bottom:28px;">Nobody assigned to this task yet.</p>
   {% endif %}
-  <a href="{% url 'manager:task-update' pk=task.id %}">Update this Task</a>
-  <br>
-  <a href="{% url 'manager:task-delete' pk=task.id %}">Delete this Task</a>
+
+  <hr class="divider">
+
+  <div class="btn-group">
+    <a href="{% url 'manager:task-update' pk=task.id %}" class="btn btn-ghost">✎ Edit Task</a>
+    <a href="{% url 'manager:task-delete' pk=task.id %}" class="btn btn-danger">⊗ Delete</a>
+  </div>
 {% endblock %}

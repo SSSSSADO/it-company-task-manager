@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Registration</title>
-{% endblock %}
+{% block title %}<title>Registration — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>Registration</h1>
+<div class="auth-wrapper">
+  <div class="auth-header">
+    <div class="auth-icon">◉</div>
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-subtitle">Join your team on TaskOS</p>
+  </div>
 
   <form action="" method="post">
     {% csrf_token %}
+    {% if form.non_field_errors %}
+      <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     {{ form.as_p }}
-    <input type="submit" value="Register">
+    <input type="submit" value="Create Account" style="width:100%; margin-top:8px;">
   </form>
+
+  <p class="auth-footer">
+    Already have an account? <a href="{% url 'manager:login' %}">Sign in</a>
+  </p>
+</div>
 {% endblock %}

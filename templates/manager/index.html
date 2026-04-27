@@ -1,26 +1,42 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Home Page</title>
-{% endblock %}
+{% block title %}<title>Dashboard — TaskOS</title>{% endblock %}
 
 {% block content %}
-  <h1>Home Page</h1>
-  <ul>
-    <li>
-      {{ num_workers }} Workers
-    </li>
-    <li>
-      {{ num_positions }} Positions
-    </li>
-    <li>
-      {{ num_tasks }} Tasks
-    </li>
-    <li>
-      {{ num_completed_tasks }} Completed tasks
-    </li>
-    <li>
-      {{ num_open_tasks }} Open tasks
-    </li>
-  </ul>
+  <div class="page-header">
+    <h1 class="page-title">Dashboard</h1>
+    <a href="{% url 'manager:task-create' %}" class="btn btn-primary">+ New Task</a>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">{{ num_workers }}</div>
+      <div class="stat-label">Workers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ num_positions }}</div>
+      <div class="stat-label">Positions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ num_tasks }}</div>
+      <div class="stat-label">Total Tasks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ num_completed_tasks }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ num_open_tasks }}</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="btn-group">
+    <a href="{% url 'manager:task-list' %}" class="btn btn-ghost">⊞ View All Tasks</a>
+    <a href="{% url 'manager:worker-list' %}" class="btn btn-ghost">◉ View Workers</a>
+    <a href="{% url 'manager:position-list' %}" class="btn btn-ghost">⬡ Positions</a>
+    <a href="{% url 'manager:task-type-list' %}" class="btn btn-ghost">◈ Task Types</a>
+  </div>
 {% endblock %}
